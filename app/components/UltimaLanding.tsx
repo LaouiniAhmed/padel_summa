@@ -4,7 +4,7 @@ import padelImage from "../../assets/padel4.jpg";
 import dispenserImage from "../../assets/smart.png";
 
 interface UltimaLandingProps {
-  onNavigate: (page: 'summa' | 'dispenser') => void;
+  onNavigate: (page: 'summa' | 'almus') => void;
 }
 
 export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
@@ -47,7 +47,7 @@ export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <motion.h1
+          <motion.h1 
             className="text-7xl md:text-9xl lg:text-[12rem] font-black mb-4 bg-gradient-to-r from-[#d4ff00] via-white to-[#d4ff00] bg-clip-text text-transparent"
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -55,7 +55,7 @@ export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
             transition={{ repeat: Infinity, duration: 5 }}
             style={{ backgroundSize: "200% auto" }}
           >
-            SUMMA
+            ULTIMA
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -109,7 +109,7 @@ export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            onClick={() => onNavigate('dispenser')}
+            onClick={() => onNavigate('almus')}
             className="group relative h-[400px] rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border-2 border-white/20 hover:border-[#d4ff00] transition-all duration-500 hover:scale-105"
           >
             <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-500">

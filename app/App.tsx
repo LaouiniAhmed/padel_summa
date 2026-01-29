@@ -12,55 +12,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'landing' | 'summa' | 'dispenser'>('landing');
 
   if (currentPage === 'landing') {
-    return (
-      <div className="min-h-screen bg-black text-white relative overflow-hidden">
-        <header className="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-black/80 backdrop-blur-md border-b border-white/10">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setCurrentPage('landing')}>
-              <div className="w-10 h-10 bg-[#EEFF00] rounded-full flex items-center justify-center">
-                <span className="text-black font-bold">⚡</span>
-              </div>
-              <span className="text-white font-black tracking-widest">ULTIMA</span>
-            </div>
-            <nav className="hidden md:flex gap-12 text-gray-400 text-sm font-semibold">
-              <a href="#features" className="hover:text-white transition">FEATURES</a>
-              <a href="#scoreboard" className="hover:text-white transition">SCOREBOARD</a>
-              <a href="#showcase" className="hover:text-white transition">SHOWCASE</a>
-            </nav>
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setCurrentPage('summa')}
-                className="px-4 py-2 bg-white/5 text-white rounded-md hover:bg-white/10"
-              >
-                SUMMA
-              </button>
-              <button
-                onClick={() => setCurrentPage('dispenser')}
-                className="px-6 py-2.5 bg-[#EEFF00] text-black font-bold rounded-lg hover:bg-[#EEFF00]/90 transition"
-              >
-                TRY DISPENSER
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <main className="pt-24">
-          <Hero />
-          <Features />
-          <section id="scoreboard" className="py-20">
-            <div className="max-w-7xl mx-auto px-8">
-              <Scoreboard />
-            </div>
-          </section>
-          <section id="showcase" className="py-20">
-            <div className="max-w-7xl mx-auto px-8">
-              <SmartDispenser />
-            </div>
-          </section>
-          <CTASection />
-        </main>
-      </div>
-    );
+    return <UltimaLanding onNavigate={(page) => setCurrentPage(page === 'almus' ? 'dispenser' : page === 'summa' ? 'summa' : 'landing')} />;
   }
 
   if (currentPage === 'dispenser') {
