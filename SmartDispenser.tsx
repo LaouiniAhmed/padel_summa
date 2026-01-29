@@ -31,7 +31,7 @@ const beverageConfigs: Record<Exclude<BeverageType, null>, BeverageConfig> = {
   peche_passion: { name: 'Pêche & Passion', logo: pechePassionLogo, liquidGradient: 'bg-gradient-to-t from-orange-500 to-yellow-400', shadowColor: '0 0 20px rgba(249, 115, 22, 0.4)', streamGradient: 'linear-gradient(to bottom, #f97316, #fbbf24)', hasBubbles: false },
   pasteque: { name: 'Pastèque', logo: pastequeLogo, liquidGradient: 'bg-gradient-to-t from-red-600 to-pink-400', shadowColor: '0 0 20px rgba(220, 38, 38, 0.4)', streamGradient: 'linear-gradient(to bottom, #dc2626, #f87171)', hasBubbles: false },
   citron_jus: { name: 'Citron / Citron Vert', logo: citronLogo, liquidGradient: 'bg-gradient-to-t from-lime-500 to-yellow-300', shadowColor: '0 0 20px rgba(101, 163, 13, 0.4)', streamGradient: 'linear-gradient(to bottom, #65a30d, #bef264)', hasBubbles: false },
-}; // Hne t-sakker el object
+};
 
 export function SmartDispenser() {
   const [selectedBeverage, setSelectedBeverage] = useState<BeverageType>(null);
@@ -165,4 +165,4 @@ const FlavorCard = ({ img, label, onClick }: any) => (
     </div>
     <span className="text-[8px] text-zinc-500 uppercase font-black text-center group-hover:text-white leading-tight">{label}</span>
   </button>
-);
+);  
