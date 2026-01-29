@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Droplets } from "lucide-react";
-import padel4 from "../../assets/padel4.png";
-import smartImage from "../../assets/smart.jpg";
+import padel4 from "../../assets/padel4.jpg";
+import smartImage from "../../assets/smart.png";
 
 interface LandingProps {
   onNavigate: (page: 'summa' | 'dispenser') => void;
