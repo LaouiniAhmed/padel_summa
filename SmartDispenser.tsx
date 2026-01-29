@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Droplet, Snowflake, Citrus, ChevronLeft, Wine } from 'lucide-react';
 
-// Salla7na el paths mta3 el logos bech el VS Code mayeb9ach a7mer
+// Salla7na el paths mta3 el logos hasb el Sidebar mte3ek
 import cocaColaLogo from './assets/KO.png';
 import fantaLogo from './assets/fanta.png';
 import spriteLogo from './assets/sprite.png';
@@ -10,6 +10,9 @@ import cassiseLogo from './assets/cassiseLogo.png';
 import pechePassionLogo from './assets/pechePassionLogo.png';
 import pastequeLogo from './assets/pastequeLogo.png';
 import citronLogo from './assets/citronLogo.png';
+
+// Lezem el "export" ykoun maktoub hakka:
+export function SmartDispenser() {
   type BeverageType = 'water' | 'fanta' | 'coca' | 'sprite' | 'cassise' | 'peche_passion' | 'pasteque' | 'citron_jus' | null;
 
   interface BeverageConfig {

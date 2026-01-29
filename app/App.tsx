@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// Salla7na el path hne (zidna el {})
+// Salla7na el path (zidna ..) w zidna el brackets { } 
 import { SmartDispenser } from "../SmartDispenser"; 
 
 export default function App() {
   const [view, setView] = useState<'summa' | 'dispenser'>('summa');
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black text-white">
       <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex gap-2 bg-zinc-900 p-1 rounded-xl border border-white/10">
         <button
           onClick={() => setView('summa')}
