@@ -1,6 +1,6 @@
 import { Cloud, Zap, Users } from "lucide-react";
-import productImage from "figma:asset/2b6d6553452aefa1ff7a1fb37e4c89d1b07736e6.png";
-import scoreboardImage from "figma:asset/06662edc4b3f81067304829fecb2d31cb46e5870.png";
+import productImage from '../../assets/padel2.jpg';
+import scoreboardImage from '../../assets/padel3.jpg';
 
 export function Features() {
   return (

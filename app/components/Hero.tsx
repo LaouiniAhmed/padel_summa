@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import heroImage from "figma:asset/1fe6c33d4cf1726260f8b9ae2e921a3b3f28c678.png";
+import heroImage from '../../assets/padel1.jpg';
 
 export function Hero() {
   return (
