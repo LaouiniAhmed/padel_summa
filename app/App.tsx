@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { SmartDispenser } from "../SmartDispenser";
 
 export default function App() {
