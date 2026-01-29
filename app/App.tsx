@@ -11,7 +11,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'landing' | 'summa' | 'dispenser'>('landing');
 
   if (currentPage === 'landing') {
-    return <Landing onNavigate={setCurrentPage} />;
+    return <Landing onNavigate={(page) => setCurrentPage(page)} />;
   }
 
   if (currentPage === 'dispenser') {

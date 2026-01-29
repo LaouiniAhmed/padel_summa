@@ -1,91 +1,228 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Trophy, Droplets } from "lucide-react";
 
 interface LandingProps {
-  onNavigate: (page: 'landing' | 'summa' | 'dispenser') => void;
+  onNavigate: (page: 'summa' | 'dispenser') => void;
 }
 
 export function Landing({ onNavigate }: LandingProps) {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-8">
-      {/* ULTIMA Logo */}
-      <div className="mb-12">
-        <div className="w-32 h-32 bg-black flex items-center justify-center">
-          <div className="text-center">
-            <div className="text-[#EEFF00] font-bold text-2xl tracking-wider">ULTIMA</div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-[#0a0a0a] to-[#1a1a1a]" />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 8,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#d4ff00]/20 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 10,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#d4ff00]/10 rounded-full blur-[120px]"
+        />
       </div>
 
-      {/* Separator Line */}
-      <div className="w-full max-w-6xl h-1 bg-black mb-12"></div>
+      <div className="relative z-10 max-w-6xl w-full">
+        {/* Main Title */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
+          <motion.h1 
+            className="text-7xl md:text-9xl lg:text-[12rem] font-black mb-4 bg-gradient-to-r from-[#d4ff00] via-white to-[#d4ff00] bg-clip-text text-transparent"
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 5,
+            }}
+            style={{
+              backgroundSize: "200% auto",
+            }}
+          >
+            ULTIMA
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-xl md:text-3xl text-gray-400 font-light tracking-wider"
+          >
+            Choose Your Experience
+          </motion.p>
+        </motion.div>
 
-      {/* Product Boxes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl">
-        {/* SUMMA Box */}
-        <div className="border-4 border-black p-8 bg-white hover:shadow-lg transition-shadow cursor-pointer"
-             onClick={() => onNavigate('summa')}>
-          <h2 className="text-2xl font-bold text-black mb-8">SUMMA</h2>
-          
-          <div className="mb-8 h-64 flex items-center justify-center bg-gray-100 relative">
-            <div className="text-center">
-              <div className="inline-block mb-4">
-                {/* Padel Racket SVG */}
-                <svg width="120" height="160" viewBox="0 0 120 160" className="mx-auto mb-4">
-                  <g stroke="black" strokeWidth="2" fill="none">
-                    {/* Handle */}
-                    <rect x="50" y="100" width="20" height="60" rx="10"/>
-                    {/* Head */}
-                    <circle cx="60" cy="70" r="40"/>
-                    {/* String pattern */}
-                    <line x1="25" y1="60" x2="95" y2="60"/>
-                    <line x1="20" y1="70" x2="100" y2="70"/>
-                    <line x1="18" y1="80" x2="102" y2="80"/>
-                    <line x1="20" y1="90" x2="100" y2="90"/>
-                    <line x1="30" y1="100" x2="90" y2="100"/>
-                    <line x1="60" y1="30" x2="60" y2="110"/>
-                    <line x1="50" y1="40" x2="70" y2="100"/>
-                    <line x1="70" y1="40" x2="50" y2="100"/>
-                  </g>
+        {/* Navigation Cards */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* SUMMA Card */}
+          <motion.button
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            onClick={() => onNavigate('summa')}
+            className="group relative h-[400px] rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border-2 border-white/20 hover:border-[#d4ff00] transition-all duration-500 hover:scale-105"
+          >
+            {/* Background Glow */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-[#d4ff00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+              }}
+            />
+
+            {/* Content */}
+            <div className="relative h-full flex flex-col items-center justify-center p-8">
+              {/* Icon */}
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.8 }}
+                className="w-32 h-32 rounded-full bg-gradient-to-br from-[#d4ff00] to-[#a3cc00] flex items-center justify-center mb-8 shadow-2xl"
+                style={{
+                  boxShadow: "0 0 60px rgba(212, 255, 0, 0.5)"
+                }}
+              >
+                <Trophy className="w-16 h-16 text-black" strokeWidth={2.5} />
+              </motion.div>
+
+              {/* Title */}
+              <h2 className="text-5xl md:text-6xl font-black italic mb-4 text-[#d4ff00] group-hover:scale-110 transition-transform duration-300">
+                SUMMA
+              </h2>
+              <p className="text-gray-400 text-lg group-hover:text-white transition-colors duration-300">
+                Padel Sports Dashboard
+              </p>
+
+              {/* Animated Arrow */}
+              <motion.div
+                className="absolute bottom-8 right-8"
+                animate={{
+                  x: [0, 10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.5,
+                }}
+              >
+                <svg 
+                  className="w-8 h-8 text-[#d4ff00] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </div>
-              {/* Padel Ball */}
-              <div className="w-24 h-24 rounded-full bg-[#EEFF00] mx-auto"></div>
-            </div>
-          </div>
+              </motion.div>
 
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate('summa');
-            }}
-            className="flex items-center gap-2 text-black font-bold text-lg hover:gap-4 transition-all">
-            view product
-            <ArrowRight className="w-5 h-5" />
-          </button>
+              {/* Decorative Lines */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4ff00] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4ff00] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          </motion.button>
+
+          {/* ALMUS Card */}
+          <motion.button
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            onClick={() => onNavigate('dispenser')}
+            className="group relative h-[400px] rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border-2 border-white/20 hover:border-[#d4ff00] transition-all duration-500 hover:scale-105"
+          >
+            {/* Background Glow */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-[#d4ff00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3,
+                delay: 0.5,
+              }}
+            />
+
+            {/* Content */}
+            <div className="relative h-full flex flex-col items-center justify-center p-8">
+              {/* Icon */}
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.8 }}
+                className="w-32 h-32 rounded-full bg-gradient-to-br from-[#60A5FA] to-[#3B82F6] flex items-center justify-center mb-8 shadow-2xl"
+                style={{
+                  boxShadow: "0 0 60px rgba(96, 165, 250, 0.5)"
+                }}
+              >
+                <Droplets className="w-16 h-16 text-white" strokeWidth={2.5} />
+              </motion.div>
+
+              {/* Title */}
+              <h2 className="text-5xl md:text-6xl font-black italic mb-4 text-[#d4ff00] group-hover:scale-110 transition-transform duration-300">
+                ALMUS
+              </h2>
+              <p className="text-gray-400 text-lg group-hover:text-white transition-colors duration-300">
+                Smart Dispenser Station
+              </p>
+
+              {/* Animated Arrow */}
+              <motion.div
+                className="absolute bottom-8 right-8"
+                animate={{
+                  x: [0, 10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.5,
+                }}
+              >
+                <svg 
+                  className="w-8 h-8 text-[#d4ff00] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </motion.div>
+
+              {/* Decorative Lines */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#60A5FA] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#60A5FA] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          </motion.button>
         </div>
 
-        {/* ALMUS Box */}
-        <div className="border-4 border-black p-8 bg-white hover:shadow-lg transition-shadow cursor-pointer"
-             onClick={() => onNavigate('dispenser')}>
-          <h2 className="text-2xl font-bold text-black mb-8">ALMUS</h2>
-          
-          <div className="mb-8 h-64 bg-gray-100 overflow-hidden flex items-center justify-center">
-            <div className="text-center text-gray-400">
-              Smart Dispenser Image
-            </div>
-          </div>
-
-          <button 
-            onClick={(e) => {
-              e.stopPropagation();
-              onNavigate('dispenser');
-            }}
-            className="flex items-center gap-2 text-black font-bold text-lg hover:gap-4 transition-all">
-            view product
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+        {/* Footer Text */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-600 text-sm uppercase tracking-widest">
+            Premium Experience Platform
+          </p>
+        </motion.div>
       </div>
     </div>
   );
