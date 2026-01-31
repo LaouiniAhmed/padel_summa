@@ -80,8 +80,12 @@ export const Sidebar = ({ activeTab, setActiveTab, onLogout, goToSumma }: Sideba
       <div className="p-4 border-t border-white/5">
         <button 
           onClick={async () => {
+            const hasConfirmed = window.confirm("Are you sure you want to logout?");
+      
+      if (hasConfirmed) {
           await supabase.auth.signOut(); // Ferme la session dans Supabase
           onLogout(); // Change l'état vers 'landing' dans App.tsx
+      }
          }}
             className="w-full flex items-center gap-4 px-4 py-3 text-zinc-500 hover:text-red-400 hover:bg-red-500/5 rounded-xl transition-all"
             >
