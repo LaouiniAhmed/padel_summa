@@ -94,7 +94,7 @@ export const Summa = ({ onBack, onNavigate }: SummaProps): React.ReactNode => {
             <h1 className="text-7xl md:text-9xl font-bold text-white mb-6 tracking-tight">SUMMA</h1>
             <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12">The future of Padel scoring has arrived. Real-time, cloud-connected, and designed for the next generation.</p>
 
-            <button className="group inline-flex items-center gap-3 bg-[#EEFF00] text-black px-10 py-5 hover:bg-[#EEFF00]/90 transition-all text-lg">Order System
+            <button onClick={() => onNavigate('login')} className="group inline-flex items-center gap-3 bg-[#EEFF00] text-black px-10 py-5 hover:bg-[#EEFF00]/90 transition-all text-lg">Order System
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
             </button>
 
@@ -205,7 +205,7 @@ export const Summa = ({ onBack, onNavigate }: SummaProps): React.ReactNode => {
               <p className="text-gray-400 text-xl max-w-3xl mx-auto mb-12">Join the future of professional Padel scoring. Get a custom quote for your facility today.</p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button className="group inline-flex items-center gap-3 bg-[#EEFF00] text-black px-12 py-6 hover:bg-[#EEFF00]/90 transition-all text-lg w-full sm:w-auto">Order System<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                <button onClick={() => onNavigate('login')} className="group inline-flex items-center gap-3 bg-[#EEFF00] text-black px-12 py-6 hover:bg-[#EEFF00]/90 transition-all text-lg w-full sm:w-auto">Order System<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
                 <button className="group inline-flex items-center gap-3 bg-transparent text-white border-2 border-white px-12 py-6 hover:bg-white hover:text-black transition-all text-lg w-full sm:w-auto">Get a Quote<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
               </div>
             </div>
