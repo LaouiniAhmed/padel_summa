@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { Landing } from "./components/Landing";
 import { UltimaLanding } from "./components/UltimaLanding";
 import { SmartDispenser } from "../SmartDispenser";
@@ -7,13 +7,100 @@ import { Hero } from "./components/Hero";
 import { Features } from "./components/Features";
 import Scoreboard from "./components/Scoreboard";
 import { CTASection } from "./components/CTASection";
+import { useState, useEffect } from "react"; 
+import { supabase } from "./lib/supabaseClient";
+import { Sidebar } from "./components/Sidebar";
+import { UserProfile } from './components/Userprofile';
+import { BookingPage } from './components/Bookingpage';
+import Auth from "./pages/Auth";
+import { UserNav } from './components/UserNav';
+import { MyMatches } from "./components/MyMatches";
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<'landing' | 'summa' | 'dispenser'>('landing');
+export default function App(): React.ReactNode {
+  const [currentPage, setCurrentPage] = useState<'landing' | 'summa' | 'dispenser' | 'dashboard' | 'login'>('landing');
+  const [activeTab, setActiveTab] = useState('overview');
 
-  if (currentPage === 'landing') {
-    return <UltimaLanding onNavigate={(page) => setCurrentPage(page === 'almus' ? 'dispenser' : page === 'summa' ? 'summa' : 'landing')} />;
+  useEffect(() => {
+    // 1. Vérifier la session actuelle au démarrage
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) setCurrentPage('dashboard');
+    };
+    checkSession();
+
+    // 2. Écouter les changements d'état (Connexion/Déconnexion)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        setCurrentPage('dashboard');
+      }
+      if (event === 'SIGNED_OUT') {
+        setCurrentPage('landing');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Logique d'affichage
+  if (currentPage === 'login') {
+    return <Auth onBack={() => setCurrentPage('landing')} />;
   }
+
+  if (currentPage === 'dashboard') {
+  return (
+  <div className="flex min-h-screen bg-black text-white">
+    {/* Sidebar reste inchangée */}
+    <Sidebar 
+      activeTab={activeTab} 
+      setActiveTab={setActiveTab} 
+      onLogout={() => setCurrentPage('landing')} 
+      goToSumma={() => setCurrentPage('summa')}
+    />
+    
+    {/* On ajoute 'relative flex flex-col' pour positionner UserNav correctement */}
+    <div className="flex-1 relative flex flex-col overflow-hidden">
+      
+      {/* 1. AJOUT DU USERNAV ICI */}
+      <UserNav /> 
+
+      {/* 2. AJOUT DE mt-16 POUR NE PAS QUE LE CONTENU SOIT SOUS LE USERNAV */}
+      <main className="flex-1 p-10 mt-16 bg-[#050505] overflow-y-auto">
+        
+        {/* CONDITION D'AFFICHAGE DYNAMIQUE */}
+        {activeTab === 'overview' && (
+          <div className="animate-in fade-in duration-500">
+            <h1 className="text-3xl font-black uppercase">
+              WELCOME TO YOUR <span className="text-[#EEFF00]">DASHBOARD</span>
+            </h1>
+            <p className="text-zinc-500 mt-2">You have now successfully logged in.</p>
+          </div>
+        )}
+
+        {activeTab === 'profile' && <UserProfile />}
+        
+        {/* On remplace le titre statique par ton composant complet */}
+        {activeTab === 'matches' && <MyMatches/>}
+
+        {activeTab === 'booking' && <BookingPage  />}
+
+        {/* Optionnel : Settings */}
+        {activeTab === 'settings' && <div className="text-zinc-500 font-bold uppercase tracking-widest p-20">Settings coming soon...</div>}
+      </main>
+    </div>
+  </div>
+);
+}
+ if (currentPage === 'landing') {
+  return (
+    <UltimaLanding 
+      onNavigate={(page) => {
+        // Ici, on ne gère plus 'login' car il n'existe plus dans UltimaLanding
+        if (page === 'almus') setCurrentPage('dispenser');
+        else if (page === 'summa') setCurrentPage('summa');
+      }} 
+    />
+  );
+}
 
   if (currentPage === 'dispenser') {
     return (
@@ -176,10 +263,38 @@ export default function App() {
       </div>
     );
   }
+if (currentPage === 'summa') {
+  return (
+    <Summa 
+      onBack={() => setCurrentPage('landing')} 
+      onNavigate={async (page) => {
+        if (page === 'login') {
+          // Vérification de la session en temps réel
+          const { data: { session } } = await supabase.auth.getSession();
+          
+          if (session) {
+            setCurrentPage('dashboard'); // Déjà connecté -> Dashboard
+          } else {
+            setCurrentPage('login'); // Pas connecté -> Auth.tsx
+          }
+        }
+      }} 
+    />
+  );
+}
+  {/*if (currentPage === 'summa') {
+  return (
+    <Summa 
+      onBack={() => setCurrentPage('landing')} 
+      onNavigate={(page) => {
+        // On traite ici la demande venant de Summa
+        if (page === 'login') {
+          setCurrentPage('login'); // Affiche le composant Auth.tsx
+        }
+      }} 
+    />
+  );
+}*/}
 
-  if (currentPage === 'summa') {
-    return <Summa onBack={() => setCurrentPage('landing')} />;
-  }
-
-  return <UltimaLanding onNavigate={(page) => setCurrentPage(page === 'dispenser' ? 'dispenser' : 'summa')} />;
+  return <UltimaLanding onNavigate={(page) => setCurrentPage(page === 'almus' ? 'dispenser' : page === 'summa' ? 'summa' : 'landing')} />;
 }

@@ -1,25 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; 
+import { supabase } from '../lib/supabaseClient';
+import { User } from 'lucide-react'; 
 import padel1 from '../../assets/padel1.jpg';
 import padel2 from '../../assets/padel2.jpg';
 import padel3 from '../../assets/padel3.png';
 import padel4 from '../../assets/padel4.jpg';
 
+
 interface SummaProps {
   onBack: () => void;
+  // Cette ligne permet à Summa de demander à changer de page
+  onNavigate: (page: 'login' | 'landing' | 'dashboard') => void; 
 }
 
-export function Summa({ onBack }: SummaProps) {
+export const Summa = ({ onBack, onNavigate }: SummaProps): React.ReactNode => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Vérifier la session au chargement
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsLoggedIn(!!session);
+    };
+    checkUser();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-black/80 backdrop-blur-md border-b border-white/10">
+    <div className="relative min-h-screen bg-black text-white">
+      <header className="fixed top-0 left-0 right-0 z-[100] px-8 py-6 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#EEFF00] flex items-center justify-center">
-              <span className="text-black font-bold text-xl">U</span>
-            </div>
-            <span className="text-white tracking-[0.2em] text-sm font-bold">ULTIMA</span>
+          
+          {/* GAUCHE : Bouton Back Home (Inchangé) */}
+          <div className="flex-1 flex justify-start">
+            <button 
+              onClick={onBack} 
+              className="group flex items-center gap-2 text-zinc-500 hover:text-[#EEFF00] transition-colors uppercase text-xs font-bold tracking-widest"
+            >
+              <span className="group-hover:-translate-x-1 transition-transform">←</span> Back Home
+            </button>
           </div>
-          <button onClick={onBack} className="px-6 py-2.5 bg-[#EEFF00] text-black font-bold rounded-lg hover:bg-[#EEFF00]/90 transition">← Back Home</button>
+
+          {/* CENTRE : Logo ULTIMA (Inchangé) */}
+          <div className="flex-1 flex justify-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-[#EEFF00] flex items-center justify-center">
+                <span className="text-black font-bold text-xl">U</span>
+              </div>
+              <span className="text-white tracking-[0.2em] text-sm font-bold">ULTIMA</span>
+            </div>
+          </div>
+
+          {/* DROITE : Bouton Dynamique (MODIFIÉ ICI) */}
+          <div className="flex-1 flex justify-end">
+            {isLoggedIn ? (
+              /* Design quand connecté : Un bouton "pill" avec icône */
+              <button 
+                onClick={() => onNavigate('login')} 
+                className="flex items-center gap-3 bg-zinc-900 border border-white/10 px-4 py-2 rounded-full hover:border-[#EEFF00]/50 transition-all group"
+              >
+                <div className="w-7 h-7 bg-[#EEFF00] rounded-full flex items-center justify-center text-black">
+                  <User size={14} strokeWidth={3} />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-tighter text-white group-hover:text-[#EEFF00]">
+                  Dashboard
+                </span>
+              </button>
+            ) : (
+              /* Design quand déconnecté (Votre design original) */
+              <button 
+                onClick={() => onNavigate('login')}
+                className="px-6 py-2 border border-[#d4ff00]/40 text-[#d4ff00] rounded-full hover:bg-[#d4ff00] hover:text-black transition-all font-bold text-xs uppercase cursor-pointer"
+              >
+                Login / Sign Up
+              </button>
+            )}
+          </div>
+
         </div>
       </header>
 

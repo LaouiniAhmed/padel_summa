@@ -1,13 +1,14 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Trophy, Droplets } from "lucide-react";
 import padelImage from "../../assets/padel4.jpg";
 import dispenserImage from "../../assets/smart.png";
 
 interface UltimaLandingProps {
-  onNavigate: (page: 'summa' | 'almus') => void;
+  onNavigate: (page: 'summa' | 'almus' ) => void;
 }
 
-export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
+export function UltimaLanding({ onNavigate }: UltimaLandingProps): React.ReactElement {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center p-4">
       {/* Animated Background */}
@@ -40,6 +41,8 @@ export function UltimaLanding({ onNavigate }: UltimaLandingProps) {
       </div>
 
       <div className="relative z-10 max-w-6xl w-full">
+
+       
         {/* Main Title */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
